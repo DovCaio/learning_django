@@ -24,4 +24,5 @@ def create_product(name, brand, volume, price, quantity):
          quantity=quantity
     )
 
-    
+def get_all_products():
+    return Product.objects.all()

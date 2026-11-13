@@ -2,7 +2,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-from products.service import create_product
+from products.serializers import ProductSerializer
+from products.service import create_product, get_all_products
 
 @api_view(["POST"])
 def create_product_view(request):
@@ -24,3 +25,12 @@ def create_product_view(request):
             status=status.HTTP_400_BAD_REQUEST
         )
     
+
+@api_view(["GET"])
+def get_all_view(request):
+    products = get_all_products()
+    serializer = ProductSerializer(products, many=True)
+    return Response(
+        serializer.data,
+        status=status.HTTP_200_OK
+    )
