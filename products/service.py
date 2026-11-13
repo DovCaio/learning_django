@@ -69,3 +69,12 @@ def update_product(id, name, brand, volume, price, quantity):
 
     except Product.DoesNotExist:
         return None
+
+def delete_product(id):
+    try:
+        product = Product.objects.get(pk=id)
+        product.delete()
+        return True
+
+    except Product.DoesNotExist:
+        return False

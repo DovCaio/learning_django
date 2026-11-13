@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from products.serializers import ProductSerializer, ProductSerializerMinimized
-from products.service import create_product, get_all_products, get_one, update_product
+from products.service import create_product, delete_product, get_all_products, get_one, update_product
 
 @api_view(["POST"])
 def create_product_view(request):
@@ -71,6 +71,16 @@ def put_view(request):
     return Response(serializer.data)
 
 
-
-
-
+@api_view(["DELETE"])
+def delete_view(request):
+    id = request.query_params.get("id")
+    if delete_product(id=id):
+        return Response(
+                    {},
+                    status=status.HTTP_204_NO_CONTENT
+                )
+    else:
+        return Response(
+                    {"error": "Product not found"},
+                    status=status.HTTP_404_NOT_FOUND
+                )
