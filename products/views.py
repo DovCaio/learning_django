@@ -27,7 +27,7 @@ def create_product_view(request):
     
 
 @api_view(["GET"])
-def get_all_view(request):
+def get_all_view(_):
     products = get_all_products()
     serializer = ProductSerializer(products, many=True)
     return Response(
