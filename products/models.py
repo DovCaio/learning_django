@@ -9,3 +9,6 @@ class Product(models.Model):
     quantity = models.IntegerField(blank=False)
     create_at = models.DateField(auto_now=True)
     updated_at = models.DateField()
+
+    def __str__(self): #This is important to be always implemented, because the the object representation used by django 
+        return f"{self.name} - {self.brand}"
