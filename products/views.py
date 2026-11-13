@@ -2,8 +2,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-from products.serializers import ProductSerializer
-from products.service import create_product, get_all_products
+from products.serializers import ProductSerializer, ProductSerializerMinimized
+from products.service import create_product, get_all_products, get_one
 
 @api_view(["POST"])
 def create_product_view(request):
@@ -30,6 +30,16 @@ def create_product_view(request):
 def get_all_view(_):
     products = get_all_products()
     serializer = ProductSerializer(products, many=True)
+    return Response(
+        serializer.data,
+        status=status.HTTP_200_OK
+    )
+
+@api_view(["GET"])
+def get_one_view(request):
+    id = request.query_params.get("id")
+    product = get_one(id)
+    serializer = ProductSerializer(product, many=False)
     return Response(
         serializer.data,
         status=status.HTTP_200_OK

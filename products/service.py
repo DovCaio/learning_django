@@ -26,3 +26,8 @@ def create_product(name, brand, volume, price, quantity):
 
 def get_all_products():
     return Product.objects.all()
+
+def get_one(id):
+    if id:
+        return Product.objects.get(id=id)
+        
