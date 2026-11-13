@@ -1,3 +1,11 @@
 from django.db import models
 
-# Create your models here.
+class Product(models.Model):
+    id = models.BigIntegerField(auto_created=True, primary_key=True)
+    name = models.CharField(max_length=200, blank=False)
+    brand = models.CharField(max_length=200, blank=False)
+    volume = models.IntegerField(blank=False)
+    price = models.FloatField(blank=False)
+    quantity = models.IntegerField(blank=False)
+    create_at = models.DateField(auto_now=True)
+    updated_at = models.DateField()
