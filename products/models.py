@@ -1,14 +1,13 @@
 from django.db import models
 
 class Product(models.Model):
-    id = models.BigIntegerField(auto_created=True, primary_key=True)
-    name = models.CharField(max_length=200, blank=False)
-    brand = models.CharField(max_length=200, blank=False)
-    volume = models.IntegerField(blank=False)
-    price = models.FloatField(blank=False)
-    quantity = models.IntegerField(blank=False)
-    create_at = models.DateField(auto_now=True)
-    updated_at = models.DateField()
+    name = models.CharField(max_length=200)
+    brand = models.CharField(max_length=200)
+    volume = models.IntegerField()
+    price = models.FloatField()
+    quantity = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self): #This is important to be always implemented, because the the object representation used by django 
+    def __str__(self):
         return f"{self.name} - {self.brand}"
