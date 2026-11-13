@@ -28,6 +28,11 @@ def get_all_products():
     return Product.objects.all()
 
 def get_one(id):
-    if id:
-        return Product.objects.get(id=id)
+    try:
+        return Product.objects.get(pk=id)
+    except Product.DoesNotExist:
+        return None
+
+def put(id):
+    pass
         

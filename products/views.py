@@ -39,8 +39,13 @@ def get_all_view(_):
 def get_one_view(request):
     id = request.query_params.get("id")
     product = get_one(id)
-    serializer = ProductSerializer(product, many=False)
-    return Response(
-        serializer.data,
-        status=status.HTTP_200_OK
-    )
+
+    if product is None:
+        return Response(
+            {"error": "Product not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    serializer = ProductSerializer(product)
+
+    return Response(serializer.data)
